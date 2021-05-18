@@ -1,5 +1,4 @@
-nitro_timer = 5000 --minimum time between nitrous (msec)
-boost_factor = 1.5 --times the original accel
+boost_factor = 0.2 --original accel + *this* times the original accel
 max_mult = 1.1 --times maximum speed
 nitro_dur = 3 --secs
 discharge_factor = 1 
@@ -28,7 +27,7 @@ Citizen.CreateThread(function()
         curr_speed = GetVehicleDashboardSpeed(vehicle)
         --print("Speed: "..curr_speed)
         --print("Nitrous: "..nitrous)
-        if (IsControlPressed(0, 21) and curr_speed > 0.2) then
+        if (IsControlPressed(0, 21) and curr_speed > 2) then
             if (nitrous <= 0) then
                 nitrous = 0
                 goto continue
