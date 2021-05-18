@@ -1,6 +1,6 @@
 Citizen.CreateThread(function()
     while true do
-    Citizen.Wait(5)
+    Citizen.Wait(0)
     local pLoc = GetEntityCoords(GetPlayerPed(-1))
     ClearAreaOfCops(pLoc.x, pLoc.y, pLoc.z, 400.0)
     end
@@ -11,7 +11,7 @@ Citizen.CreateThread(function()
         Citizen.InvokeNative(0xDC0F817884CDD856, i, false)
     end
     while true do
-        Citizen.Wait(5)
+        Citizen.Wait(0)
         if GetPlayerWantedLevel(PlayerId()) ~= 0 then
             ClearPlayerWantedLevel(PlayerId())
         end
@@ -20,7 +20,7 @@ end)
 
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(5)
+		Wait(0)
 		for i = 1, 12 do
 			EnableDispatchService(i, false)
 		end
