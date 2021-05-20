@@ -1,7 +1,7 @@
 boost_factor = 0.2 --original accel + *this* times the original accel
 max_mult = 1.1 --times maximum speed
 nitro_dur = 3 --secs
-discharge_factor = 1 
+discharge_factor = 1
 recharge_factor = 0.5
 
 Citizen.CreateThread(function()    
@@ -24,7 +24,7 @@ Citizen.CreateThread(function()
         if not (IsToggleModOn(vehicle,19)) then
             goto continue
         end
-        curr_speed = GetVehicleDashboardSpeed(vehicle)
+        curr_speed = GetEntitySpeed(vehicle)
         --print("Speed: "..curr_speed)
         --print("Nitrous: "..nitrous)
         if (IsControlPressed(0, 21) and curr_speed > 2) then
