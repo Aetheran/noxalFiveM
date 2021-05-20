@@ -25,8 +25,6 @@ Citizen.CreateThread(function()
             goto continue
         end
         curr_speed = GetEntitySpeed(vehicle)
-        --print("Speed: "..curr_speed)
-        --print("Nitrous: "..nitrous)
         if (IsControlPressed(0, 21) and curr_speed > 2) then
             if (nitrous <= 0) then
                 nitrous = 0

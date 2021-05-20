@@ -82,16 +82,6 @@ function notify(text)
     DrawNotification(true, true)
 end
 
---[[
-    Citizen.CreateThread(function()
-    while true do
-    Citizen.Wait(0)
-    local pLoc = GetEntityCoords(GetPlayerPed(-1))
-    ClearAreaOfCops(pLoc.x, pLoc.y, pLoc.z, 400.0)
-    end
-end
-]]--
-
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(1000)
@@ -105,16 +95,3 @@ Citizen.CreateThread(function()
         ::continue::
 	end
 end)
-
---Citizen.CreateThread(function()
---    while true do
---        Citizen.Wait(1000)
---        print(is_godmode)
---        if (is_godmode) then
---            SetPlayerInvincible(GetPlayerPed(-1), true)
---            SetEntityHealth(PlayerPedId(), 200)
---        elseif (GetEntityHealth(GetPlayerPed(-1)) ~= 0) then
---            SetPlayerInvincible(GetPlayerPed(-1), false)
---        end
---    end
---end)
