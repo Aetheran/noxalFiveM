@@ -51,7 +51,7 @@ Citizen.CreateThread(function()
         local gear = 0
         local rpm = 0
         speed = GetEntitySpeed(GetVehiclePedIsIn(GetPlayerPed(-1), false))*2.236936 --constant for conversion to mph
-        gear = GetVehicleCurrentGear(GetVehiclePedIsIn(-1), false)
+        gear = GetVehicleCurrentGear(GetVehiclePedIsIn(GetPlayerPed(-1), false))
         --rpm = GetVehicleClutch(GetVehiclePedIsIn(GetPlayerPed(-1), false))
         --if rpm < 0.2 then rpm = 0.2 end
         
