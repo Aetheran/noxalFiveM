@@ -2,6 +2,5 @@ fx_version 'cerulean'
 game 'gta5'
 
 client_scripts {
-    'noxClient.lua',
-    'nox-mph.lua'
+    'noxClient.lua'
 }

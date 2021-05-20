@@ -5,7 +5,8 @@ client_scripts {
     '@menuv/menuv.lua',
     'weaponMenu.lua',
     'nox-menu.lua',
-    'nox-spawn.lua'
+    'nox-spawn.lua',
+    'nox-mph.lua'
 }
 
 dependencies {
