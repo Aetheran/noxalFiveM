@@ -1,10 +1,10 @@
-boost_factor = 50.4 --original accel + *this* times the original accel
-max_mult = 1.3 --times maximum speed
+boost_factor = 0.2 --original accel + *this* times the original accel
+max_mult = 1.1 --times maximum speed
 nitro_dur = 3 --secs
-discharge_factor = 1 --multiplies with nitro_dur
-recharge_factor = 0.5 -- ^^
+discharge_factor = 1
+recharge_factor = 0.5
 
-Citizen.CreateThread(function()
+Citizen.CreateThread(function()    
     loop_start = 0
     nitrous = 1
     last_v = 0
@@ -18,10 +18,8 @@ Citizen.CreateThread(function()
         if not (last_v == vehicle) then --cache max speed/accel if vehicle changed
             last_v = vehicle
             if (vehicle == 0) then goto continue end
-            SetVehicleNitroEnabled(vehicle, false)
             v_max_speed = GetVehicleEstimatedMaxSpeed(vehicle)*max_mult
             v_accel = GetVehicleAcceleration(vehicle)
-
         end
         if not (IsToggleModOn(vehicle,19)) then
             goto continue
@@ -32,6 +30,7 @@ Citizen.CreateThread(function()
                 nitrous = 0
                 goto continue
             end
+            accel = GetVehicleAcceleration(vehicle)
             new_speed = v_accel*boost_factor*dt + curr_speed --multiply speed
             nitrous = nitrous - dt/nitro_dur*discharge_factor
             if (new_speed > v_max_speed) then new_speed = v_max_speed --clamp speed
@@ -50,21 +49,8 @@ Citizen.CreateThread(function()
     end
 end)
 
---[[
-Citizen.CreateThread(function()
-    enabled = false
-    vehicle = nil
-    while true do
-        cur_vehicle = GetVehiclePedIsIn(GetPlayerPed(-1))
-        if (cur_vehicle ~= vehicle) then
-            vehicle = cur_vehicle
-            enabled = false
-        end
-        if (not enabled and IsToggleModOn(vehicle,19)) then
-            SetVehicleNitroEnabled(vehicle, true, 3, 10000, false)
-            enabled = true
-        end
-        Citizen.Wait(1000)
-    end
-end)
---]]
+function notify(text)
+    SetNotificationTextEntry("STRING")
+    AddTextComponentString(text)
+    DrawNotification(true, true)
+end
