@@ -24,11 +24,17 @@ end)
 
 cops:On('check', function(item)
     is_cops_on = true
+    for i = 1, 12 do
+        EnableDispatchService(i, true)
+    end
     notify("Cops Enabled")
 end)
 
 cops:On('uncheck', function(item)
     is_cops_on = false
+    for i = 1, 12 do
+        EnableDispatchService(i, false)
+    end
     notify("Cops Disabled")
 end)
 
@@ -40,14 +46,12 @@ end)
 godmode:On('check', function(item)
     SetEntityHealth(PlayerPedId(), 200)
     is_godmode = true
-    --SetPlayerInvincible(GetPlayerPed(-1), true)
     SetEntityCanBeDamaged(GetPlayerPed(-1), false)
     notify("Godmode Enabled")
 end)
 
 godmode:On('uncheck', function(item)
     is_godmode = false
-    --SetPlayerInvincible(GetPlayerPed(-1), false)
     SetEntityCanBeDamaged(GetPlayerPed(-1), true)
     notify("Godmode Disabled")
 end)

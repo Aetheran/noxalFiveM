@@ -1,4 +1,5 @@
-boost_factor = 0.2 --original accel + *this* times the original accel
+--[[
+boost_factor = 50.0 --original accel + *this* times the original accel
 max_mult = 1.1 --times maximum speed
 nitro_dur = 3 --secs
 discharge_factor = 1
@@ -54,3 +55,20 @@ function notify(text)
     AddTextComponentString(text)
     DrawNotification(true, true)
 end
+--]]
+Citizen.CreateThread(function()
+    enabled = false
+    vehicle = nil
+    while true do
+        cur_vehicle = GetVehiclePedIsIn(GetPlayerPed(-1))
+        if (cur_vehicle ~= vehicle) then
+            vehicle = cur_vehicle
+            enabled = false
+        end
+        if (not enabled and IsToggleModOn(vehicle,19)) then
+            SetVehicleNitroEnabled(vehicle, true, 3, 10000, false)
+            enabled = true
+        end
+        Citizen.Wait(1000)
+    end
+end)
