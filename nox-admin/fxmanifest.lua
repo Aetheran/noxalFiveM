@@ -6,7 +6,10 @@ client_scripts {
     'weaponMenu.lua',
     'nox-menu.lua',
     'nox-spawn.lua',
+<<<<<<< Updated upstream
     'nox-mph.lua'
+=======
+>>>>>>> Stashed changes
 }
 
 dependencies {
