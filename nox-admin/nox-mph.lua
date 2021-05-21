@@ -58,14 +58,13 @@ Citizen.CreateThread(function()
         local gear = 0
         local rpm = 0
         local fuel = 0
-        local veh = GetVehiclePedIsIn(GetPlayerPed(-1))
-        speed = GetEntitySpeed(veh, false)*2.236936 --constant for conversion to mph
-        gear = GetVehicleCurrentGear(veh, false)
-        fuel = GetVehicleFuelLevel(veh)
         --rpm = GetVehicleClutch(veh, false)
         --if rpm < 0.2 then rpm = 0.2 end
         
         if(IsPedInAnyVehicle(GetPlayerPed(-1), false)) then
+            speed = GetEntitySpeed(GetVehiclePedIsIn(GetPlayerPed(-1)), false)*2.236936 --constant for conversion to mph
+            gear = GetVehicleCurrentGear(GetVehiclePedIsIn(GetPlayerPed(-1)), false)
+            fuel = GetVehicleFuelLevel(GetVehiclePedIsIn(GetPlayerPed(-1)))
             drawVar("~g~" .. math.ceil(speed), x1, y1)
             drawTitle("MPH", x2, y2)
             --drawVar("~r~" .. math.abs(rpm)*6000, x3, y3)
