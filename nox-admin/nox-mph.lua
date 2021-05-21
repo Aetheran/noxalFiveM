@@ -7,6 +7,8 @@ x3 = 0.016 --rpm
 y3 = 0.883
 x4 = 0.016 --gear
 y4 = 0.883
+x5 = 0.1
+y5 = 0.9
 
 --functions
 
@@ -24,7 +26,7 @@ function drawVar(var, x, y) --actual var print
     DrawText(x, y)
 end
 
-function drawTitle(var, x, y) --Title
+function drawTitle(var, x, y) --Title edit: why did I make the same function twice lol oops
     SetTextFont(2)
     SetTextScale(0.9, 0.9)
     SetTextEntry("STRING")
@@ -42,6 +44,11 @@ function txtDraw(x, y, width, height, scale, var, r, g, b, a) --this might be cl
     DrawText(x - width/2, y - height/2 + 0.005)
 end
 
+--[[function fuelGauge(fuelLvl, x, y)
+    local width = 0.15 --0.0-1.0, 1.0 means the whole screen
+    local height = 0.05 
+    DrawRect(x, y, width, height, r, g, b, 255) --why in god's name are the x/y relative to the center of the rectangle?
+end]]--
 --main thread
 
 Citizen.CreateThread(function()
@@ -50,9 +57,12 @@ Citizen.CreateThread(function()
         local speed = 0
         local gear = 0
         local rpm = 0
-        speed = GetEntitySpeed(GetVehiclePedIsIn(GetPlayerPed(-1), false))*2.236936 --constant for conversion to mph
-        gear = GetVehicleCurrentGear(GetVehiclePedIsIn(GetPlayerPed(-1), false))
-        --rpm = GetVehicleClutch(GetVehiclePedIsIn(GetPlayerPed(-1), false))
+        local fuel = 0
+        local veh = GetVehiclePedIsIn(GetPlayerPed(-1))
+        speed = GetEntitySpeed(veh, false)*2.236936 --constant for conversion to mph
+        gear = GetVehicleCurrentGear(veh, false)
+        fuel = GetVehicleFuelLevel(veh)
+        --rpm = GetVehicleClutch(veh, false)
         --if rpm < 0.2 then rpm = 0.2 end
         
         if(IsPedInAnyVehicle(GetPlayerPed(-1), false)) then
@@ -60,6 +70,7 @@ Citizen.CreateThread(function()
             drawTitle("MPH", x2, y2)
             --drawVar("~r~" .. math.abs(rpm)*6000, x3, y3)
             drawVar("~r~" .. gear, x4, y4)
+            --fuelGauge(fuel, )
         end
     end
 end)
